@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<app-component xmlns="http://schemas.haulmont.com/cuba/app-component.xsd"
+               dependsOn="com.haulmont.cuba">
+
+    <module name="global" blocks="*">
+        <artifact name="cipher-global" appJar="true"/>
+
+        <property name="cuba.persistenceConfig" value="+com/mvgreen/cipher/persistence.xml"/>
+        <property name="cuba.metadataConfig" value="+com/mvgreen/cipher/metadata.xml"/>
+        <property name="cuba.viewsConfig" value="+com/mvgreen/cipher/views.xml"/>
+    </module>
+    <module name="core" dependsOn="global" blocks="core">
+        <artifact name="cipher-core" appJar="true"/>
+        <artifact name="cipher-core" classifier="db" ext="zip" configuration="dbscripts"/>
+
+        <property name="cuba.springContextConfig" value="+com/mvgreen/cipher/spring.xml"/>
+        <property name="cuba.mainMessagePack" value="+com.mvgreen.cipher.core"/>
+    </module>
+    <module name="web" dependsOn="global" blocks="web">
+        <artifact name="cipher-web" appJar="true"/>
+        <artifact name="cipher-web" classifier="web" ext="zip" configuration="webcontent"/>
+
+        <property name="cuba.springContextConfig" value="+com/mvgreen/cipher/web-spring.xml"/>
+        <property name="cuba.dispatcherSpringContextConfig" value="+com/mvgreen/cipher/web-dispatcher-spring.xml"/>
+        <property name="cuba.windowConfig" value="+com/mvgreen/cipher/web-screens.xml"/>
+        <property name="cuba.menuConfig" value="+com/mvgreen/cipher/web-menu.xml"/>
+        <property name="cuba.permissionConfig" value="+com/mvgreen/cipher/web-permissions.xml"/>
+        <property name="cuba.mainMessagePack" value="+com.mvgreen.cipher.web"/>
+    </module>
+</app-component>

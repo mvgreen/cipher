@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:gui="http://schemas.haulmont.com/cuba/spring/cuba-gui.xsd">
+
+    <!-- Annotation-based beans -->
+    <context:component-scan base-package="com.mvgreen.cipher"/>
+    
+    <gui:screens base-packages="com.mvgreen.cipher.web"/>
+    <bean id="cipher_proxyCreator" class="com.haulmont.cuba.web.sys.remoting.WebRemoteProxyBeanCreator">
+        <property name="serverSelector" ref="cuba_ServerSelector"/>
+        <property name="remoteServices">
+            <map>
+                <entry key="cipher_CipherService" value="com.mvgreen.cipher.service.CipherService"/>
+                <entry key="cipher_SymmetricAlgorithmService"
+                       value="com.mvgreen.cipher.service.SymmetricAlgorithmService"/>
+                <entry key="cipher_AsymmetricAlgorithmService"
+                       value="com.mvgreen.cipher.service.AsymmetricAlgorithmService"/>
+            </map>
+        </property>
+    </bean>
+
+</beans>
